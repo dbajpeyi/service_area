@@ -1,7 +1,7 @@
 _Store
 db.news
 db.sqlite3
-service_area_api/*pyc
+*.pyc
 Thumbs.db
 */vendor
 ionic/platforms
