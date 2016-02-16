@@ -35,3 +35,9 @@ class ServiceArea(models.Model):
     name = models.CharField(max_length = 255)
     area = models.PolygonField()
     price= models.DecimalField(max_digits=5, decimal_places=2)
+    provider=models.ForeignKey('Provider')
+
+
+    def __unicode__(self):
+        return self.name
+
