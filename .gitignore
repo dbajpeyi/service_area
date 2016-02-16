@@ -5,7 +5,8 @@ db.sqlite3
 Thumbs.db
 */vendor
 ionic/platforms
-project/static/
+service_area_api/staticfiles/
+service_area_api/static/
 .coverage
 vendor/
 *.swp
