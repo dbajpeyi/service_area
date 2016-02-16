@@ -9,7 +9,7 @@ router.register(r'area', views.ServiceAreaViewSet)
 urlpatterns = router.urls
 
 urlpatterns.extend([
-    url(r'^area/(?P<lng>\-?\d+\.\d+)/(?P<lat>\-?\d+\.\d+)/$', views.ServiceAreaByLatLng.as_view()),
+    url(r'^areas/(?P<lng>\-?\d+\.\d+)/(?P<lat>\-?\d+\.\d+)/$', views.ServiceAreaByLatLng.as_view()),
 ])
 
 
