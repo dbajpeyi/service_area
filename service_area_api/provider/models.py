@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.conf import settings
+from django.contrib.gis.db import models
 import uuid
 
 
@@ -16,7 +17,6 @@ class Provider(models.Model):
     currency = models.ForeignKey('Currency')
 
 
-
 class Currency(models.Model):
 
     name = models.CharField(max_length=20)
@@ -28,3 +28,10 @@ class Currency(models.Model):
     def __unicode__(self):
         return self.name
 
+
+class ServiceArea(models.Model):
+    
+    ext_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length = 255)
+    area = models.PolygonField()
+    price= models.DecimalField(max_digits=5, decimal_places=2)
