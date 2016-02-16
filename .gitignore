@@ -1,0 +1,15 @@
+_Store
+db.news
+db.sqlite3
+*.pyc
+Thumbs.db
+*/vendor
+ionic/platforms
+project/static/
+.coverage
+vendor/
+*.swp
+project/settings/user.py
+celerybeat-schedule
+celerybeat.pid
+
