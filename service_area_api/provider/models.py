@@ -8,6 +8,9 @@ import uuid
 
 
 class Provider(models.Model):
+    """
+    Model for providers; shuttle company owners
+    """
 
     ext_id = models.UUIDField(primary_key=True, default= uuid.uuid4, editable=False)
     name = models.CharField(max_length=128)
@@ -18,25 +21,33 @@ class Provider(models.Model):
 
 
 class Currency(models.Model):
+    """
+    Currency model, can store html code for rendering 
+    currency symbols to html
+    """
 
     name = models.CharField(max_length=20)
     code = models.CharField(max_length=3)
     html_code = models.CharField(max_length=10)
-
-
 
     def __unicode__(self):
         return self.name
 
 
 class ServiceArea(models.Model):
+    """
+    Container model to contain polygons along with additional 
+    fields like name and price provided in that area. Polygons
+    are used to define areas on a globe. Each provider can create
+    multiple polygons as their service areas along with the price
+    they offer in those areas
+    """
     
     ext_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length = 255)
     area = models.PolygonField()
     price= models.DecimalField(max_digits=5, decimal_places=2)
     provider=models.ForeignKey('Provider')
-
 
     def __unicode__(self):
         return self.name
