@@ -26,9 +26,9 @@ class Currency(models.Model):
     currency symbols to html
     """
 
-    name = models.CharField(max_length=20)
-    code = models.CharField(max_length=3)
-    html_code = models.CharField(max_length=10)
+    name = models.CharField(max_length=20, unique=True)
+    code = models.CharField(max_length=3, unique=True)
+    html_code = models.CharField(max_length=10, blank=True, null=True)
 
     def __unicode__(self):
         return self.name
