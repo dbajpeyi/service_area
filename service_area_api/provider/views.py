@@ -20,9 +20,7 @@ class ServiceAreaViewSet(viewsets.ModelViewSet):
     queryset = ServiceArea.objects.all()
 
 
-
 class ServiceAreaByLatLng(ListAPIView):
-
 
     def get_queryset(self):
         lat = self.kwargs.get('lat')
