@@ -6,7 +6,7 @@ DATABASES = {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'moziodb',
         'USER': 'deepankar',
-        'PASSWORD': 'gomozio',
+        'PASSWORD': 'admin',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
