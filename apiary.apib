@@ -1,0 +1,249 @@
+FORMAT: 1A
+HOST: http://localhost
+
+# Service Area API Docs
+
+RESTful endpoints to C/R/U/D providers and service areas
+
+## Providers Collection [/providers]
+
+### List All Providers [GET]
+    
+    List all the providers
+
++ Response 200 (application/json)
+
+        [
+            {
+                "ext_id": "a8a32a32-be01-4746-94ae-d497df980c0f",
+                "name": "Test provider",
+                "email": "dbajpeyi@gmail.com",
+                "phone": "test",
+                "language": "en",
+                "currency": 1
+            }
+        ]
+
+### Get one Provider [GET /providers/:ext_id]
+
+    Get one provider by passing the ext_id e.g /providers/a8a32a32-be01-4746-94ae-d497df980c0f
+
++ Response 200 (application/json)
+
+        [
+            {
+                "ext_id": "a8a32a32-be01-4746-94ae-d497df980c0f",
+                "name": "Test provider",
+                "email": "dbajpeyi@gmail.com",
+                "phone": "test",
+                "language": "en",
+                "currency": 1
+            }
+        ]
+
+
+### Create a New Provider [POST]
+
+    You may create your own provider using this action. It takes a JSON
+    object containing name, email and currency 
+
++ Request (application/json)
+
+        {
+            "name" : "Provider name",
+            "email" : "test@example.com",
+            "currency" : {
+                "name" : "US Dollars",
+                "code" : "USD",
+                "html_code" : "USD"
+            }
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /questions/2
+
+    + Body
+
+            [
+                {
+                    "ext_id": "a8a32a32-be01-4746-94ae-d497df980c0f",
+                    "name": "Test provider",
+                    "email": "test@example.com",
+                    "phone": "test",
+                    phone "+91 119119111",
+                    "language": "en",
+                    "currency": 1
+                }
+            ]
+
+        
+### Update a New Provider [PUT /providers/:ext_id]
+
+    Update a provider. Just pass the primary key (ext_id) and other details
+
++ Request (application/json)
+
+        {
+            "ext_id" : "a8a32a32-be01-4746-94ae-d497df980c0f"
+            "exit" : "New name",
+            "email" : "test@example.com",
+            "phone" : "+91 119199191",
+            "language": "en",
+            "currency" : 1
+        }
+
++ Response 201 (application/json)
+
+ 
+    + Body
+
+            [
+                {
+                    "ext_id": "a8a32a32-be01-4746-94ae-d497df980c0f",
+                    "name": "New provider",
+                    "email": "test@example.com",
+                    "phone": "+91 119199191",
+                    "language": "en",
+                    "currency": 1
+                    
+                }
+            ]
+           
+           
+           
+## Service area [/area]
+
+### List All Service Areas [GET /area]
+    
+    List all the Service Areas
+
++ Response 200 (application/json)
+
+        {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "id": "8a3ca801-4c8e-4866-b89c-9d2e8d3ca455",
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Polygon",
+                        "coordinates": [
+                            [
+                                [
+                                    0.0,
+                                    0.0
+                                ],
+                                [
+                                    0.0,
+                                    50.0
+                                ],
+                                [
+                                    50.0,
+                                    50.0
+                                ],
+                                [
+                                    50.0,
+                                    0.0
+                                ],
+                                [
+                                    0.0,
+                                    0.0
+                                ]
+                            ]
+                        ]
+                    },
+                    "properties": {
+                        "name": "Test area",
+                        "price": "123.22",
+                        "provider": "a8a32a32-be01-4746-94ae-d497df980c0f"
+                   }
+                }
+        ]
+    }
+
+### Get Service areas containing a coord pair [GET /areas/:lat/:lng]
+
+Get list of service areas for a set of coordinates (lat,lng)
+
++ Response 200 (application/json)
+
+        {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "id": "8a3ca801-4c8e-4866-b89c-9d2e8d3ca455",
+                "type": "Feature",
+                "geometry": {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                0.0,
+                                0.0
+                            ],
+                            [
+                                0.0,
+                                50.0
+                            ],
+                            [
+                                50.0,
+                                50.0
+                            ],
+                            [
+                                50.0,
+                                0.0
+                            ],
+                            [
+                                0.0,
+                                0.0
+                            ]
+                        ]
+                    ]
+                },
+                "properties": {
+                    "name": "Test area",
+                    "price": "123.22",
+                    "provider": "a8a32a32-be01-4746-94ae-d497df980c0f"
+                }
+            },
+            {
+                "id": "1729d456-191f-4832-88c2-816a9ce2a3c0",
+                "type": "Feature",
+                "geometry": {
+                    "type": "Polygon",
+                    "coordinates": [
+                        [
+                            [
+                                0.0,
+                                0.0
+                            ],
+                            [
+                                0.0,
+                                50.0
+                                ],
+                            [
+                                50.0,
+                                50.0
+                            ],
+                            [
+                                50.0,
+                                0.0
+                            ],
+                            [
+                                0.0,
+                                0.0
+                            ]
+                        ]
+                    ]
+                },
+                "properties": {
+                        "name": "test",
+                    "price": "123.00",
+                    "provider": "a8a32a32-be01-4746-94ae-d497df980c0f"
+                }
+            }
+        ]
+        }
