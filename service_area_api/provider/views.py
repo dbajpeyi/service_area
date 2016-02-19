@@ -28,7 +28,6 @@ class ServiceAreaByLatLng(ListAPIView):
         lat = self.kwargs.get('lat')
         lng = self. kwargs.get('lng')
         pt =  GEOSGeometry('POINT ({0} {1})'.format(lng, lat), srid=4326) 
-        print lat, lng , pt
         return ServiceArea.objects.filter(area__contains = pt)
 
     def list(self, *args, **kwargs):
