@@ -4,6 +4,7 @@ from provider.views import *
 from django.test import TestCase
 from django.contrib.gis.geos import Polygon
 from decimal import Decimal
+import json
 
 class ProviderAPITest(TestCase):
 
@@ -44,6 +45,48 @@ class ProviderAPITest(TestCase):
         resp = view(req, lat='-7.0', lng='36.0')
         self.assertEqual(len(resp.data.get('features')), 0)
 
+    def test_create_service_area_with_polygon_geojson_type(self):
+        area = json.dumps({
+                'type' : 'Polygon',
+                'coordinates' : [[
+                    [0.0,0.0],
+                    [0.0,50.0],
+                    [50.0,50.0],
+                    [50.0,0.0],
+                    [0.0,0.0],
+                    ]]
+               })
 
+        data = {
+            'name' : 'test',
+            'area' : area,
+            'provider' : self.provider.ext_id,
+            'price' : Decimal('123.2')
+        }
+        req = self.factory.post('/area', data)
+        view = ServiceAreaViewSet.as_view(
+                actions = {'post' : 'create'}
+            )
+        resp = view(req)
+        self.assertEqual(resp.status_code, 201)
+        
+        
+    def test_create_service_area_with_point_geojson_type(self):
+        area = json.dumps({
+                'type' : 'Point',
+                'coordinates' : [0.0,0.0],
+               })
 
-
+        data = {
+            'name' : 'test',
+            'area' : area,
+            'provider' : self.provider.ext_id,
+            'price' : Decimal('123.2')
+        }
+        req = self.factory.post('/area', data)
+        view = ServiceAreaViewSet.as_view(
+                actions = {'post' : 'create'}
+            )
+        resp = view(req)
+        self.assertEqual(resp.status_code, 400)
+        
