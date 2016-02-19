@@ -10,3 +10,12 @@ class ServiceAreaSerializer(GeoFeatureModelSerializer):
     class Meta:
         model = ServiceArea
         geo_field = 'area'
+
+
+    def create(self, validated_data):
+        try:
+            return ServiceArea.objects.create(**validated_data)
+        except TypeError:
+            error = {'area' : 'Can only accept GeoJson type Polygon'}
+            raise serializers.ValidationError(error)
+
