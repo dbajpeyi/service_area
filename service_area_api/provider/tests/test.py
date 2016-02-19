@@ -36,13 +36,13 @@ class ProviderAPITest(TestCase):
         req = self.factory.get('/areas/26.0/26.0')	
         view = ServiceAreaByLatLng.as_view()
         resp = view(req, lat='26.0', lng='26.0')
-        self.assertEqual(len(resp.data), 1)
+        self.assertEqual(len(resp.data.get('features')), 1)
 
     def test_no_service_areas_when_point_outside_polygons(self):
         req = self.factory.get('/areas/-7.0/36.0')	
         view = ServiceAreaByLatLng.as_view()
         resp = view(req, lat='-7.0', lng='36.0')
-        self.assertEqual(len(resp.data), 0)
+        self.assertEqual(len(resp.data.get('features')), 0)
 
 
 
